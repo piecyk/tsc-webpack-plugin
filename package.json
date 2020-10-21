@@ -1,20 +1,27 @@
 {
   "name": "tsc-webpack-plugin",
-  "version": "0.0.1",
-  "description": "A TypeScript plugin for webpack",
+  "version": "0.0.2",
+  "description": "A TypeScript plugin for webpack.",
   "author": "Damian Pieczynski piecyk@gmail.com",
   "main": "index.js",
   "license": "MIT",
   "engines": {
     "node": ">=10.13.0"
   },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "typescript"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/piecyk/tsc-webpack-plugin.git"
   },
+  "bugs": {
+    "url": "https://github.com/piecyk/tsc-webpack-plugin/issues"
+  },
   "peerDependencies": {
-    "typescript": "^4.0.0",
-    "webpack": "^5.0.0"
+    "webpack": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
     "node-pty": "^0.9.0"
