@@ -4,6 +4,8 @@
 
 ## Install
 
+This plugin requires minimum **node 10**, **webpack 4.37.0**
+
 ```bash
 yarn add -D tsc-webpack-plugin
 ```
