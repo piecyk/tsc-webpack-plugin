@@ -1,15 +1,10 @@
-const path = require("path")
-const webpack = require("webpack");
 const TscWebpackPlugin = require("..");
 
 module.exports = {
-  entry: "./src/index.ts",
   mode: "development",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-  },
+  entry: "./src/index.ts",
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"],
+    extensions: [".ts", ".tsx", ".js"],
   },
   module: {
     rules: [
@@ -20,5 +15,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.ProgressPlugin(), new TscWebpackPlugin()],
+  plugins: [new TscWebpackPlugin()],
 };
