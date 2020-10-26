@@ -13,9 +13,9 @@ yarn add -D tsc-webpack-plugin
 > Example how to configure it with [babel-loader](https://github.com/babel/babel-loader)
 > can be found in [**example**](./example) directory.
 
-* [@babel/preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
-* [Babel with TypeScript](https://www.typescriptlang.org/docs/handbook/babel-with-typescript.html)
-* [What is a tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+- [Babel with TypeScript](https://www.typescriptlang.org/docs/handbook/babel-with-typescript.html)
+- [What is a tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+- [@babel/preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
 
 > Using babel for transpiling, webpack for bundling and tsc for types.
 
@@ -43,21 +43,22 @@ module.exports = {
   },
   plugins: [new TscWebpackPlugin()],
 };
-
 ```
 
 ## Options
 
 You can pass tsc [CLI Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) as object to plugin.
 
-For example cli `--project ./config/tsconfig.json` will be
+For example cli `--build --project ./config/tsconfig.json` will be
 
 ```js
 const TscWebpackPlugin = require("tsc-webpack-plugin");
 
 module.exports = {
   // ...
-  plugins: [new TscWebpackPlugin({ project: "./config/tsconfig.json" })],
+  plugins: [
+    new TscWebpackPlugin({ build: "", project: "./config/tsconfig.json" }),
+  ],
   // ...
 };
 ```

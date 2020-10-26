@@ -1,6 +1,7 @@
 const path = require("path");
 const os = require("os");
 const pty = require("node-pty");
+const stripAnsi = require("strip-ansi");
 
 class TscError extends Error {
   constructor(message) {
@@ -70,7 +71,17 @@ class TscWebpackPlugin {
 
     ptyProcess.onData((data) => {
       if (isWatch) {
-        logger.info(removeNewLinesAtEnd(data));
+        const str = removeNewLinesAtEnd(data);
+        const withoutAnsi = stripAnsi(str);
+
+        if (
+          /error TS\d*:/.test(withoutAnsi) ||
+          /Found [1-9][0-9]* errors?\b./.test(withoutAnsi)
+        ) {
+          logger.error(str);
+        } else {
+          logger.info(str);
+        }
       } else {
         messages.push(data);
       }
