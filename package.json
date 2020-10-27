@@ -1,6 +1,6 @@
 {
   "name": "tsc-webpack-plugin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A TypeScript plugin for webpack.",
   "author": "Damian Pieczynski piecyk@gmail.com",
   "main": "index.js",
@@ -20,12 +20,8 @@
   "bugs": {
     "url": "https://github.com/piecyk/tsc-webpack-plugin/issues"
   },
-  "peerDependencies": {
-    "webpack": "^4.0.0 || ^5.0.0"
-  },
   "dependencies": {
-    "node-pty": "^0.9.0",
-    "strip-ansi": "^6.0.0"
+    "node-pty": "^0.9.0"
   },
   "devDependencies": {
     "prettier": "^2.1.2"

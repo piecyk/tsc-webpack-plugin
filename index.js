@@ -1,7 +1,6 @@
 const path = require("path");
 const os = require("os");
 const pty = require("node-pty");
-const stripAnsi = require("strip-ansi");
 
 class TscError extends Error {
   constructor(message) {
@@ -71,31 +70,17 @@ class TscWebpackPlugin {
 
     ptyProcess.onData((data) => {
       if (isWatch) {
-        const str = removeNewLinesAtEnd(data);
-        const without = stripAnsi(str);
-
-        if (
-          /Starting compilation in watch mode...$/.test(without) ||
-          /Starting incremental compilation...$/.test(without) ||
-          /Found 0 errors. Watching for file changes.$/.test(without)
-        ) {
-          logger.info(str);
-        } else {
-          if (/Found [1-9][0-9]* errors?\b./.test(without)) {
-            messages.push(str);
-            logger.error(messages.join(""));
-
-            messages = [];
-          } else {
-            messages.push(data);
-          }
-        }
+        logger.info(removeNewLinesAtEnd(data));
       } else {
         messages.push(data);
       }
     });
 
-    if (!isWatch) {
+    if (isWatch) {
+      ptyProcess.onExit((e) => {
+        process.exit(e.exitCode);
+      });
+    } else {
       logger.info("Starting typechecking...");
 
       compiler.hooks.afterEmit.tapPromise(PLUGIN_NAME, async (compilation) => {
