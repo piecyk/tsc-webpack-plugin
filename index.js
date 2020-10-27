@@ -72,15 +72,23 @@ class TscWebpackPlugin {
     ptyProcess.onData((data) => {
       if (isWatch) {
         const str = removeNewLinesAtEnd(data);
-        const withoutAnsi = stripAnsi(str);
+        const without = stripAnsi(str);
 
         if (
-          /error TS\d*:/.test(withoutAnsi) ||
-          /Found [1-9][0-9]* errors?\b./.test(withoutAnsi)
+          /Starting compilation in watch mode...$/.test(without) ||
+          /Starting incremental compilation...$/.test(without) ||
+          /Found 0 errors. Watching for file changes.$/.test(without)
         ) {
-          logger.error(str);
-        } else {
           logger.info(str);
+        } else {
+          if (/Found [1-9][0-9]* errors?\b./.test(without)) {
+            messages.push(str);
+            logger.error(messages.join(""));
+
+            messages = [];
+          } else {
+            messages.push(data);
+          }
         }
       } else {
         messages.push(data);
